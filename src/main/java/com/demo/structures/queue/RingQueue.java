@@ -1,4 +1,4 @@
-package com.demo.queue;
+package com.demo.structures.queue;
 
 import java.util.Scanner;
 

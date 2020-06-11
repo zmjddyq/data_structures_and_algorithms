@@ -1,11 +1,12 @@
-package com.demo.stack;
+package com.demo.structures.stack;
 
 import java.util.Scanner;
 
 /**
  * @author zmj
  * @date 2020/6/11 20:07
- * @Description
+ * @Description 数组模拟栈demo
+ *
  */
 public class ArrayStackDemo {
     public static void main(String[] args) {

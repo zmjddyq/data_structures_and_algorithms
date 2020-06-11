@@ -1,4 +1,4 @@
-package com.demo.linkedlist;
+package com.demo.structures.linkedlist;
 
 import org.junit.Test;
 

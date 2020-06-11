@@ -1,6 +1,4 @@
-package com.demo.queue;
-
-import com.sun.jmx.remote.internal.ArrayQueue;
+package com.demo.structures.queue;
 
 import java.util.Scanner;
 

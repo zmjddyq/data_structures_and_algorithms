@@ -1,4 +1,4 @@
-package com.demo.structure;
+package com.demo.structures.structure;
 
 /**
  * @author zmj
