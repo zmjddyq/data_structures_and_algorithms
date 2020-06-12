@@ -5,17 +5,17 @@ import java.util.Scanner;
 /**
  * @author zmj
  * @date 2020/6/11 20:07
- * @Description 数组模拟栈demo
+ * @Description 单链表模拟栈demo
  *
  */
-public class ArrayStackDemo {
+public class LinkedListStackDemo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         char key = ' ';
         boolean flag = true;
         System.out.print("请输入创建栈的大小:");
         int maxSize = scanner.nextInt();
-        LinkedListStack arrayStack = new LinkedListStack(maxSize);
+        LinkedListStack linkedListStack = new LinkedListStack(maxSize);
         while (flag) {
             System.out.println("请输入一个字符，l：遍历栈，p：添加数据，g：取出数据，e：退出程序");
             System.out.print("输入:");
@@ -23,7 +23,7 @@ public class ArrayStackDemo {
             switch (key){
                 case 'l':
                     try {
-                        arrayStack.list();
+                        linkedListStack.list();
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -32,7 +32,7 @@ public class ArrayStackDemo {
                     System.out.print("请输入要添加的数据:");
                     int value = scanner.nextInt();
                     try {
-                        arrayStack.push(value);
+                        linkedListStack.push(value);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -40,7 +40,7 @@ public class ArrayStackDemo {
 
                 case 'g':
                     try {
-                        System.out.println("取出的数据为： "  + arrayStack.pop());
+                        System.out.println("取出的数据为： "  + linkedListStack.pop());
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -54,51 +54,55 @@ public class ArrayStackDemo {
             }
 
         }
+        scanner.close();
         System.out.println("程序退出");
     }
 }
 
-class ArrayStack{
+class LinkedListStack {
     /**
      * 栈大小
      */
     private int maxSize;
     /**
-     * 模拟栈
+     * 头
      */
-    private int[] stack = null;
+    private MyNode head ;
     /**
      * 栈顶
      */
-    private int top = -1;
+    private int top = 0;
 
-    public ArrayStack(int maxSize) {
+    public LinkedListStack(int maxSize) {
         this.maxSize = maxSize;
-        stack = new int[maxSize];
+        head = new MyNode(0);
     }
 
     /**
      * 判断是否栈满
      */
     public boolean isFull() {
-        return top == maxSize - 1;
+        return top == maxSize;
     }
 
     /**
      * 判断是否是空栈
      */
     public boolean isEmpty(){
-        return top == -1;
+        return top == 0;
     }
 
     /**
      * 入栈
      */
     public void push(int value){
+        MyNode myNode = new MyNode(value);
         if (isFull()) {
             throw new RuntimeException("栈已满，添加失败!");
         }
-        stack[++top] = value;
+        myNode.next = head.next;
+        head.next = myNode;
+        top++;
     }
 
     /**
@@ -108,8 +112,14 @@ class ArrayStack{
         if (isEmpty()) {
             throw new RuntimeException("栈为空，取出失败!");
         }
-        int value = stack[top];
-        stack[top--] = 0;
+        int value = head.next.value;
+        if (top == 1){
+            head.next = null;
+            top--;
+            return value;
+        }
+        head.next = head.next.next;
+        top--;
         return value;
     }
 
@@ -120,8 +130,25 @@ class ArrayStack{
         if (isEmpty()) {
             throw new RuntimeException("栈为空，取出失败!");
         }
-        for (int i = top; i >= 0; i--) {
-            System.out.println(stack[i]);
+        MyNode temp = head.next;
+        while (temp != null){
+            System.out.println(temp);
+            temp = temp.next;
         }
+    }
+}
+class MyNode{
+    public int value;
+    public MyNode next;
+
+    public MyNode(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "MyNode{" +
+                "value=" + value +
+                '}';
     }
 }
