@@ -1,0 +1,29 @@
+
+S	java:S106"9Replace this use of System.out or System.err by a logger.(áÉÔÿÿÿÿÿ
+i	java:S100–"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûßç«ÿÿÿÿÿ
+J
+java:S3740T"/Provide the parametrized type for this generic.(¦¸ñøÿÿÿÿ
+f
+java:S1149."PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(Á¯ñÓ
+V	java:S125"<This block of commented-out lines of code should be removed.(Â—Ú™üÿÿÿÿ
+k
+java:S1149R"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(‡‚…üÿÿÿÿ
+k	java:S117R"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡‚…üÿÿÿÿ
+K
+java:S1191"5Use classes from the Java API instead of Sun classes.(Åşøê
+s	java:S135l"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ
+h	java:S100O"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×İû™üÿÿÿÿ
+l	java:S127b"XRefactor the code in order to not assign to this loop counter from within the loop body.(ÆÍ“\
+v
+java:S1488#"`Immediately return this expression instead of assigning it to the temporary variable "strings1".(æˆÉÇ
+s	java:S135U"YReduce the total number of break and continue statements in this loop to use at most one.(ğÊ™ëüÿÿÿÿ
+T	java:S106™"9Replace this use of System.out or System.err by a logger.(‹ÇôÓÿÿÿÿÿ
+J
+java:S3740T"/Provide the parametrized type for this generic.(¦¸ñøÿÿÿÿ
+a	java:S112²"FDefine and throw a dedicated exception instead of using a generic one.(áÖ§Âûÿÿÿÿ
+2
+java:S3626†"Remove this redundant jump.(ÉŠ©ƒ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ
+m
+java:S3776O"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(×İû™üÿÿÿÿ
+[	java:S112G"FDefine and throw a dedicated exception instead of using a generic one.(×¡®¥

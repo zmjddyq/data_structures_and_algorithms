@@ -1,0 +1,40 @@
+
+v
+java:S1192‹"ZDefine a constant instead of duplicating this literal "æ ˆä¸ºç©ºï¼Œå–å‡ºå¤±è´¥!" 4 times.(ùšôÿúÿÿÿÿ
+p
+java:S1192"ZDefine a constant instead of duplicating this literal "æ ˆå·²æ»¡ï¼Œæ·»åŠ å¤±è´¥!" 3 times.(ÒìûÓ
+[	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÒìûÓ
+Z	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(ÚÔ·@
+[	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(ìŸ¸ı
+\	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÒìûÓ
+a	java:S112‹"FDefine and throw a dedicated exception instead of using a generic one.(ùšôÿúÿÿÿÿ
+a	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(ùšôÿúÿÿÿÿ
+a	java:S112»"FDefine and throw a dedicated exception instead of using a generic one.(áÖ§Âûÿÿÿÿ
+\	java:S112Ò"FDefine and throw a dedicated exception instead of using a generic one.(˜‘š
+\	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÒìûÓ
+a	java:S112‹"FDefine and throw a dedicated exception instead of using a generic one.(ùšôÿúÿÿÿÿ
+a	java:S112—"FDefine and throw a dedicated exception instead of using a generic one.(ùšôÿúÿÿÿÿ
+a	java:S112°"FDefine and throw a dedicated exception instead of using a generic one.(áÖ§Âûÿÿÿÿ
+\	java:S112Ç"FDefine and throw a dedicated exception instead of using a generic one.(˜‘š
+h	java:S101×"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Â®¿ùÿÿÿÿ
+l	java:S127="XRefactor the code in order to not assign to this loop counter from within the loop body.(ÆÍ“\
+s	java:S135"YReduce the total number of break and continue statements in this loop to use at most one.(ğÊ™ëüÿÿÿÿ
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·‘ÌÏ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½ºŠ™ÿÿÿÿÿ
+l	java:S117¬"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å’†´ùÿÿÿÿ
+l	java:S117Á"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á˜ïÑıÿÿÿÿ
+l	java:S117¶"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á˜ïÑıÿÿÿÿ
+I
+java:S1128".Remove this unused import 'java.util.Scanner'.(ÒÜÅ¸úÿÿÿÿ
+Q
+java:S1854"6Remove this useless assignment to local variable "ch".(¶±â‘úÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(Çµí‘
+S	java:S106M"9Replace this use of System.out or System.err by a logger.(ùµÈ°üÿÿÿÿ
+N	java:S106U"9Replace this use of System.out or System.err by a logger.(’ıÙ†
+N	java:S106W"9Replace this use of System.out or System.err by a logger.(’ıÙ†
+T	java:S106›"9Replace this use of System.out or System.err by a logger.(×Û¼ˆüÿÿÿÿ
+i	java:S100¬"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å’†´ùÿÿÿÿ
+i	java:S100Á"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á˜ïÑıÿÿÿÿ
+T	java:S106š"9Replace this use of System.out or System.err by a logger.(×Û¼ˆüÿÿÿÿ
+i	java:S100¶"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á˜ïÑıÿÿÿÿ
