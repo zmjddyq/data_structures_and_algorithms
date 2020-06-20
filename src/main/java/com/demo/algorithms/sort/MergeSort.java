@@ -13,7 +13,7 @@ import java.util.Random;
 public class MergeSort {
     public static void main(String[] args) {
 
-        int[] array = new int[80000];
+        int[] array = new int[8000000];
         Random random = new Random();
         for (int i = 0; i < array.length; i++) {
             array[i] = random.nextInt(100000);
