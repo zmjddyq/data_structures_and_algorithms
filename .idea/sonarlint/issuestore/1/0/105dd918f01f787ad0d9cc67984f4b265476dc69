@@ -1,0 +1,21 @@
+
+n
+java:S1104b"QMake right a static final constant or non-public and provide accessors if needed.(Ö¢è¥8»… û¬.
+S
+java:S2696@"6Make the enclosing method "static" or remove this set.(Š±ö¢8ì¶ü¬.
+U	java:S106K"9Replace this use of System.out or System.err by a logger.(‚æ³ç8ß‚¡ü¬.
+m
+java:S1104a"PMake left a static final constant or non-public and provide accessors if needed.(ó÷ÔÄ8»… û¬.
+U	java:S106O"9Replace this use of System.out or System.err by a logger.(‚æ³ç8ß‚¡ü¬.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ˆ¹ÂÍùÿÿÿÿ8‚Òü¬.
+Z	java:S106Q"9Replace this use of System.out or System.err by a logger.( ØÂ‰şÿÿÿÿ8ß‚¡ü¬.
+U	java:S106Y"9Replace this use of System.out or System.err by a logger.(Ãˆ¦‚8ß‚¡ü¬.
+Z	java:S106N"9Replace this use of System.out or System.err by a logger.(ÁÂÔıûÿÿÿÿ8ß‚¡ü¬.
+Z
+java:S1155L">Use isEmpty() to check whether the collection is empty or not.(›ãœ8ß‚¡ü¬.
+U	java:S106h"9Replace this use of System.out or System.err by a logger.(¿è®Î8ª§ü¬.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ç˜ì ÿÿÿÿÿ8šÙ•ü¬.
+{
+java:S1210}"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(áÂ¦ÿÿÿÿÿ8»… û¬.
+s
+java:S1104`"QMake value a static final constant or non-public and provide accessors if needed.(‚¯¥ùÿÿÿÿ8»… û¬.

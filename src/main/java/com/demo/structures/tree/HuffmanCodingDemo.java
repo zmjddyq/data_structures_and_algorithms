@@ -1,37 +1,45 @@
 package com.demo.structures.tree;
 
-import org.junit.Test;
-import sun.applet.Main;
-import sun.security.util.Length;
 
+import java.io.*;
 import java.util.*;
 
 /**
  * @author zmj
  * @date 2020/6/20 16:20
- * @Description
+ * @Description 霍夫曼编码 → 压缩 、解压
  */
 public class HuffmanCodingDemo {
     public static void main(String[] args) {
-//        String message = "i like like like java do you like a java";
-//        String message = "Talk is cheap,Show me the code";
-        String message = "You build it, You run it.";
-        byte[] bytes = message.getBytes();
-        HuffmanCodingTree huffmanCodingTree = new HuffmanCodingTree();
-/*        PriorityQueue<HuffmanNode> adjust = huffmanCodingTree.adjust(bytes);
-        System.out.println(adjust.toString());*/
-        System.out.println("树化后的根节点为： " + huffmanCodingTree.creatHuffmanTree(bytes));
-        huffmanCodingTree.preTraversal();
-        System.out.println("*********************************************");
-        HashMap huffmanCoding = huffmanCodingTree.getHuffmanCoding();
-        System.out.println(huffmanCoding);
-        System.out.println("*********************************************");
-        byte[] zip = huffmanCodingTree.zip(bytes, huffmanCoding);
-        System.out.println(Arrays.toString(zip));
-        System.out.println("*********************************************");
-        String decode = huffmanCodingTree.decode(zip, huffmanCoding);
-        System.out.println(decode);
+////        String message = "i like like like java do you like a java";
+////        String message = "Talk is cheap,Show me the code";
+//        String message = "You build it, You run it.";
+//        byte[] bytes = message.getBytes();
+//        HuffmanCodingTree huffmanCodingTree = new HuffmanCodingTree();
+///*        PriorityQueue<HuffmanNode> adjust = huffmanCodingTree.adjust(bytes);
+//        System.out.println(adjust.toString());*//*
+//        System.out.println("树化后的根节点为： " + huffmanCodingTree.creatHuffmanTree(bytes));
+//        huffmanCodingTree.preTraversal();
+//        System.out.println("*********************************************");
+//        HashMap huffmanCoding = huffmanCodingTree.getHuffmanCoding();
+//        System.out.println(huffmanCoding);
+//        System.out.println("*********************************************");
+//        byte[] zip = huffmanCodingTree.zip(bytes, huffmanCoding);
+//        System.out.println(Arrays.toString(zip));*/
+//        // 压缩
+//        byte[] zip = huffmanCodingTree.huffmanZip(bytes);
+//        // 获取编码表
+//        // HashMap<Byte, String> huffmanCoding = huffmanCodingTree.getHuffmanCodingMap();
+//        System.out.println("*********************************************");
+//        byte[] decode = huffmanCodingTree.decode(zip);
+//        System.out.println(new String(decode));
 
+        // 文件压缩测试
+        HuffmanCodingTree huffmanCodingTree = new HuffmanCodingTree();
+        huffmanCodingTree.zipFile("D:\\123.txt", "D:\\123.zip");
+        System.out.println("压缩完成");
+        huffmanCodingTree.unZipFile("D:\\123.zip", "D:\\321.txt");
+        System.out.println("解压完成");
     }
 }
 
@@ -40,7 +48,87 @@ class HuffmanCodingTree {
     private HuffmanNode root;
     private HashMap<Byte, String> huffmanCodingMap = new HashMap<>();
 
-    public String decode(byte[] bytes, HashMap<Byte, String> huffmanCodingMap) {
+    public HuffmanNode getRoot() {
+        return root;
+    }
+
+    public HashMap<Byte, String> getHuffmanCodingMap() {
+        return huffmanCodingMap;
+    }
+
+    //编写一个方法，完成对压缩文件的解压
+
+    /**
+     * @param zipFile 准备解压的文件
+     * @param dstFile 将文件解压到哪个路径
+     */
+    public void unZipFile(String zipFile, String dstFile) {
+        try (InputStream is = new FileInputStream(zipFile);
+             ObjectInputStream ois = new ObjectInputStream(is);
+             OutputStream os = new FileOutputStream(dstFile)) {
+            //创建文件输入流
+            //创建一个和  is关联的对象输入流
+            //读取byte数组  huffmanBytes
+            byte[] huffmanBytes = (byte[]) ois.readObject();
+            //读取赫夫曼编码表
+            HashMap<Byte, String> huffmanCodes = (HashMap<Byte, String>) ois.readObject();
+            //解码
+            byte[] bytes = decode(huffmanBytes, huffmanCodes);
+            //将bytes 数组写入到目标文件
+            //写数据到 dstFile 文件
+            os.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    //编写方法，将一个文件进行压缩
+
+    /**
+     * @param srcFile 你传入的希望压缩的文件的全路径
+     * @param dstFile 我们压缩后将压缩文件放到哪个目录
+     */
+    public void zipFile(String srcFile, String dstFile) {
+        try (OutputStream os = new FileOutputStream(dstFile);
+             ObjectOutputStream oos = new ObjectOutputStream(os);
+             FileInputStream is = new FileInputStream(srcFile)) {
+            //创建文件的输入流
+            //创建一个和源文件大小一样的byte[]
+            byte[] b = new byte[is.available()];
+            //读取文件
+            is.read(b);
+            //直接对源文件压缩
+            byte[] huffmanBytes = huffmanZip(b);
+            //创建文件的输出流, 存放压缩文件
+            //创建一个和文件输出流关联的ObjectOutputStream
+            //把 赫夫曼编码后的字节数组写入压缩文件
+            //这里我们以对象流的方式写入 赫夫曼编码，是为了以后我们恢复源文件时使用
+            //注意一定要把赫夫曼编码 写入压缩文件
+            oos.writeObject(huffmanBytes);
+            oos.writeObject(huffmanCodingMap);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * 译码
+     *
+     * @param bytes
+     * @return
+     */
+    public byte[] decode(byte[] bytes) {
+        return decode(bytes, this.huffmanCodingMap);
+    }
+
+    /**
+     * 译码
+     *
+     * @param bytes
+     * @param huffmanCodingMap
+     * @return
+     */
+    public byte[] decode(byte[] bytes, HashMap<Byte, String> huffmanCodingMap) {
         boolean flag = true;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < bytes.length - 1; i++) {
@@ -48,31 +136,54 @@ class HuffmanCodingTree {
             if (i == bytes.length - 2) {
                 flag = false;
             }
-            stringBuilder.append(byteToString(flag, bytes[i] ,bytes[bytes.length - 1]));
+            stringBuilder.append(byteToString(flag, bytes[i], bytes[bytes.length - 1]));
         }
-        String s = stringBuilder.toString();
-        StringBuilder result = new StringBuilder();
         HashMap<String, Byte> huffmanDecodeHashMap = adjustMap(huffmanCodingMap);
-        while (s.length() > 0) {
-            for (String key : huffmanDecodeHashMap.keySet()) {
-                if (s.startsWith(key)) {
-                    char c = (char) huffmanDecodeHashMap.get(key).byteValue();
-                    result.append(c);
-                    s = s.substring(key.length());
+        //创建要给集合，存放byte
+        List<Byte> list = new ArrayList<>();
+        //i 可以理解成就是索引,扫描 stringBuilder
+        for(int  i = 0; i < stringBuilder.length(); ) {
+            // 小的计数器
+            int count = 1;
+            boolean breakFlag = true;
+            Byte b = null;
+
+            while(breakFlag) {
+                //1010100010111...
+                //递增的取出 key 1
+                //i 不动，让count移动，指定匹配到一个字符
+                String key = stringBuilder.substring(i, i+count);
+                b = huffmanDecodeHashMap.get(key);
+                if(b == null) {
+                    //说明没有匹配到
+                    count++;
+                }else {
+                    //匹配到
+                    breakFlag = false;
                 }
             }
+            list.add(b);
+            //i 直接移动到 count
+            i += count;
         }
-        return result.toString();
+        //当for循环结束后，我们list中就存放了所有的字符  "i like like like java do you like a java"
+        //把list 中的数据放入到byte[] 并返回
+        byte b[] = new byte[list.size()];
+        for(int i = 0;i < b.length; i++) {
+            b[i] = list.get(i);
+        }
+        return b;
     }
 
     /**
      * 将编码表转换为译码表
+     *
      * @return
      */
-    private HashMap<String,Byte> adjustMap(HashMap<Byte, String> huffmanCodingMap){
+    private HashMap<String, Byte> adjustMap(HashMap<Byte, String> huffmanCodingMap) {
         HashMap<String, Byte> stringByteHashMap = new HashMap<>();
         for (Map.Entry<Byte, String> byteStringEntry : huffmanCodingMap.entrySet()) {
-            stringByteHashMap.put(byteStringEntry.getValue(),byteStringEntry.getKey());
+            stringByteHashMap.put(byteStringEntry.getValue(), byteStringEntry.getKey());
         }
         return stringByteHashMap;
     }
@@ -95,13 +206,30 @@ class HuffmanCodingTree {
     }
 
     /**
+     * 封装压缩过程
+     *
+     * @param bytes
+     * @return
+     */
+    public byte[] huffmanZip(byte[] bytes) {
+        // 创造霍夫曼树
+        HuffmanNode huffmanNode = creatHuffmanTree(bytes);
+        // 建立编码表
+        HashMap huffmanCoding = getHuffmanCoding();
+        // 数据压缩
+        byte[] zip = zip(bytes, huffmanCoding);
+        return zip;
+
+    }
+
+    /**
      * 数据压缩
      *
      * @param bytes            要压缩的字节数组
      * @param huffmanCodingMap 编码表
      * @return
      */
-    public byte[] zip(byte[] bytes, HashMap<Byte, String> huffmanCodingMap) {
+    private byte[] zip(byte[] bytes, HashMap<Byte, String> huffmanCodingMap) {
         StringBuilder stringBuilder = new StringBuilder();
         // 将消息转为编码数据
         for (byte b : bytes) {
@@ -135,7 +263,7 @@ class HuffmanCodingTree {
     /**
      * 获取哈夫曼编码表
      */
-    public HashMap getHuffmanCoding() {
+    private HashMap getHuffmanCoding() {
         if (root == null) {
             System.out.println("请先创建哈夫曼树!");
             return null;
@@ -176,7 +304,7 @@ class HuffmanCodingTree {
      * @param arr
      * @return
      */
-    public PriorityQueue<HuffmanNode> adjust(byte[] arr) {
+    private PriorityQueue<HuffmanNode> adjust(byte[] arr) {
         // 存放字符权值
         HashMap<Byte, Integer> byteIntegerHashMap = new HashMap<>();
         for (byte c : arr) {
@@ -214,9 +342,9 @@ class HuffmanCodingTree {
      * 将数组变为哈夫曼树
      *
      * @param arr
-     * @return
+     * @return 树的根节点
      */
-    public HuffmanNode creatHuffmanTree(byte[] arr) {
+    private HuffmanNode creatHuffmanTree(byte[] arr) {
         // 创建节点队列
         // 遍历数组创建节点
         // 将集合中的节点进行升序排序

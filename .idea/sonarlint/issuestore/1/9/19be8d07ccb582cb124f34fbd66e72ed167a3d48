@@ -1,0 +1,7 @@
+
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ıÊÈÄüÿÿÿÿ
+m	java:S1278"XRefactor the code in order to not assign to this loop counter from within the loop body.(¯ÀÚè
+N	java:S106"9Replace this use of System.out or System.err by a logger.(×Æáî
+U
+java:S1118":Add a private constructor to hide the implicit public one.(Ä¡Ïñúÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(ÉÎ‘¡ùÿÿÿÿ
