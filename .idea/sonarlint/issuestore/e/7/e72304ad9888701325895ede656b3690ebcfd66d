@@ -1,0 +1,34 @@
+
+z	java:S135}"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8ùÇê±­.
+b	java:S112w"FDefine and throw a dedicated exception instead of using a generic one.(Î›ûŞ8ùÇê±­.
+h	java:S112œ"FDefine and throw a dedicated exception instead of using a generic one.(ÂÃ…Çùÿÿÿÿ8ùÇê±­.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(®ÚİÓşÿÿÿÿ8ÔÈ›±­.
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(íú²â8Ÿş°­.
+V	java:S106É"9Replace this use of System.out or System.err by a logger.(–õğí8ùÇê±­.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(®ÚİÓşÿÿÿÿ8ÿõ°­.
+]
+java:S1128";Remove this unused import 'java.nio.file.NotLinkException'.(ñºÀáùÿÿÿÿ8ù±±­.
+b
+java:S1854/"@Remove this useless assignment to local variable "deleteResult".(Äšşãıÿÿÿÿ8Êó²±­.
+S
+java:S1481/"1Remove this unused "deleteResult" local variable.(Äšşãıÿÿÿÿ8Êó²±­.
+g
+java:S2259›"DA "NullPointerException" could be thrown; "values" is nullable here.(¾ ö°ıÿÿÿÿ8ùÇê±­.
+Q
+java:S1066M"/Merge this if statement with the enclosing one.(ıü‡Ìûÿÿÿÿ8İëÈ²­.
+T	java:S106"9Replace this use of System.out or System.err by a logger.(˜µå8”Ÿ±­.
+U	java:S106"9Replace this use of System.out or System.err by a logger.(§Ìø8•Ë¸°­.
+V	java:S106Ø"9Replace this use of System.out or System.err by a logger.(‡œ£Ñ8ùÇê±­.
+m
+java:S2259Y"KA "NullPointerException" could be thrown; "searchParent()" can return null.(é»ÿ½ÿÿÿÿÿ8èşÃ²­.
+M
+java:S1128"0Remove this unused import 'java.util.SortedMap'.(’ŸÕ8âíş®­.
+Q
+java:S1128"4Remove this unused import 'java.lang.reflect.Array'.(‡¡É˜8òìø®­.
+c
+java:S1126g"AReplace this if-then-else statement by a single return statement.(¼«¯˜üÿÿÿÿ8ùÇê±­.
+o
+java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(€èàŞ8ùÇê±­.
+9
+java:S3626"Remove this redundant jump.(ÉŠ©ƒ8ùÇê±­.

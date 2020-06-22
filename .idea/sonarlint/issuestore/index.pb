@@ -29,3 +29,5 @@ L
 src/test/java/TotalTest.java,f\d\fd07d3ed24da41533f1e26f9d322c27d493fae60
 m
 =src/main/java/com/demo/structures/tree/HuffmanCodingDemo.java,0\0\0051bfb75a01badb63507608dd0cca7031998eed
+n
+>src/main/java/com/demo/structures/tree/BinarySortTreeDemo.java,e\7\e72304ad9888701325895ede656b3690ebcfd66d

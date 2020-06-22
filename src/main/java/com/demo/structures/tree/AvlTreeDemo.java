@@ -5,94 +5,192 @@ package com.demo.structures.tree;
  * @date 2020/6/21 15:07
  * @Description
  */
-public class BinarySortTreeDemo {
+public class AvlTreeDemo {
     public static void main(String[] args) {
-        AvlTree binarySortTree = new AvlTree();
-        int[] arr = {15, 10, 25, 4, 60, 1, 8, 19, 23, 18, 22, 24, 16, 17, 18};
-        binarySortTree.add(arr);
-        binarySortTree.inTraversal();
+        AvlTree avlTree = new AvlTree();
+        int[] arr = {15, 10, 25, 4, 60, 1, 8, 19, 23, 18, 22, 24, 16, 17};
+//        int[] arr = {10, 11, 7, 6, 8, 9};
+        avlTree.add(arr);
+        avlTree.inTraversal();
         System.out.println("***************************");
-        System.out.println(binarySortTree.contain(10));
+        System.out.println(avlTree.contain(10));
+        System.out.println("根节点为: " + avlTree.getRoot());
+        System.out.println("树总高: " + avlTree.treeHeight()); // 6
+        System.out.println("左子树总高: " + avlTree.leftHeight()); // 3
+        System.out.println("右子树总高: " + avlTree.rightHeight());  // 5
         System.out.println("***************************");
-        binarySortTree.delete(16);
+        avlTree.delete(15);
         System.out.println("删除后");
-        binarySortTree.inTraversal();
+        avlTree.inTraversal();
+        System.out.println("root:" + avlTree.getRoot());
     }
 }
 
-class BinarySortTree {
+class AvlTree {
     private Node root;
-    // true:左 false:右
-    boolean flag;
 
     /**
-     * 删除节点
+     * 旋转判断
+     */
+    private void RotateDecide() {
+        // 左旋转判断
+        if (rightHeight() - leftHeight() > 1) {
+            // 如果右子树的左子树高度大于右子树高度，则先对右子树进行右旋转
+            if (rightHeight(root.right) < leftHeight(root.right)) {
+                RotateRight(root.right);
+            }
+            RotateLeft(root);
+            // 右旋转判断
+        } else if (leftHeight() - rightHeight() > 1) {
+            if (rightHeight(root.left) > leftHeight(root.left)) {
+                RotateLeft(root.left);
+            }
+            RotateRight(root);
+        }
+    }
+
+    /**
+     * 左旋转
+     */
+    private void RotateLeft(Node node) {
+        // 创建新的节点，为原来的根节点的值
+        Node temp = new Node(node.value);
+        // 给新的节点链接左右节点
+        temp.left = node.left;
+        temp.right = node.right.left;
+        // 根节点的换成源右子节点
+        node.value = node.right.value;
+        // 重新指向原来的右节点
+        node.right = node.right.right;
+        // 指向新的节点
+        node.left = temp;
+    }
+
+    /**
+     * 右旋转
+     */
+    private void RotateRight(Node node) {
+        // 创建新的节点，为原来的根节点的值
+        Node temp = new Node(node.value);
+        // 给新的节点链接左右节点
+        temp.left = node.left.right;
+        temp.right = node.right;
+        // 根节点的换成源左子节点
+        node.value = node.left.value;
+        // 重新指向原来的右节点
+        node.left = node.left.left;
+        // 指向新的节点
+        node.right = temp;
+    }
+
+    /**
+     * 统计整树左子树高度
+     *
+     * @return
+     */
+    public int leftHeight() {
+        return leftHeight(root);
+    }
+
+    /**
+     * 统计左子树高度
+     *
+     * @return
+     */
+    private int leftHeight(Node node) {
+        if (node == null || node.left == null) {
+            return 0;
+        }
+        return treeHeight(node.left);
+    }
+
+    /**
+     * 统计整树右子树高度
+     *
+     * @return
+     */
+    public int rightHeight() {
+        return rightHeight(root);
+    }
+
+    /**
+     * 统计右子树高度
+     *
+     * @return
+     */
+    private int rightHeight(Node node) {
+        if (node == null || node.right == null) {
+            return 0;
+        }
+        return treeHeight(node.right);
+    }
+
+    /**
+     * 返回整棵树的高度
+     *
+     * @return
+     */
+    public int treeHeight() {
+        if (root == null) {
+            return 0;
+        }
+        return treeHeight(root);
+    }
+
+    /**
+     * 输入节点到树末端的高度
+     *
+     * @param node
+     * @return
+     */
+    private int treeHeight(Node node) {
+        return Math.max(node.left == null ? 0 : treeHeight(node.left), node.right == null ? 0 : treeHeight(node.right)) + 1;
+    }
+
+    /**
+     * 刪除节点
+     *
      * @param value
      * @return
      */
     public Integer delete(int value) {
-        // 1:左 2:右
+        // 0:根节点 1:左 2:右
         int flag = 0;
+        // 获取待删节点的父节点
         Node node = searchParent(value);
+        // 未找到待删节点
         if (node == null) {
             return null;
         }
         Node temp = node;
-        // 判断是父节点的左右节点
+        // 判断待删节点是父节点的左/右节点
         if (temp.left != null && temp.left.value == value) {
             flag = 1;
+            temp = temp.left;
         } else if (temp.right != null && temp.right.value == value) {
             flag = 2;
-        }
-        if (flag != 0) {
-            if (flag == 1) {
-                temp = temp.left;
-            } else {
-                temp = temp.right;
-            }
+            temp = temp.right;
         }
         // 当要删除的是叶子节点
         if (temp.left == null && temp.right == null) {
             int deleteResult = temp.value;
-            if (flag == 1) {
-                node.left = null;
-            } else if (flag == 2) {
-                node.right = null;
-            } else {
-                root = null;
-            }
+            adjustNode(flag, node, null);
             return value;
         }
         // 当要删除的只有左子节点
         if (temp.left != null && temp.right == null) {
-            if (flag == 1) {
-                node.left = temp.left;
-            } else if (flag == 2) {
-                node.right = temp.left;
-            } else {
-                root = temp.left;
-            }
+            adjustNode(flag, node, temp.left);
             return value;
         }
         // 当要删除的只有右子节点
         if (temp.left == null) {
-            if (flag == 1) {
-                node.left = temp.right;
-            } else if (flag == 2) {
-                node.right = temp.right;
-            } else {
-                root = temp.right;
-            }
+            adjustNode(flag, node, temp.right);
             return value;
         }
         // 当要删除的有两个子节点
         Node smallTemp = temp.right;
         if (smallTemp.left == null) {
-            if (flag == 1) {
-                node.left = smallTemp;
-            } else {
-                node.right = smallTemp;
-            }
+            adjustNode(flag, node, smallTemp);
             smallTemp.left = temp.left;
             return value;
         }
@@ -105,6 +203,29 @@ class BinarySortTree {
         searchParent(smallTemp.value).left = null;
         temp.value = smallTemp.value;
         return value;
+    }
+
+    /**
+     * delete 根据父节点类型删除节点
+     *
+     * @param flag   0:根节点 1:左 2:右
+     * @param parent
+     * @param son
+     */
+    private void adjustNode(int flag, Node parent, Node son) {
+        switch (flag) {
+            case 1:
+                parent.left = son;
+                break;
+            case 2:
+                parent.right = son;
+                break;
+            case 0:
+                root = son;
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -177,7 +298,7 @@ class BinarySortTree {
     }
 
     /**
-     * 添加元素
+     * 添加单个元素
      *
      * @param value
      * @return
@@ -190,12 +311,15 @@ class BinarySortTree {
         }
         Node temp = root;
         while (true) {
+            // 添加的值已经存在
             if (temp.value == value) {
                 return -1;
             }
+            // 当要添加的值小于当前的的指针的值
             if (value < temp.value) {
                 if (temp.left == null) {
                     temp.left = node;
+                    RotateDecide();
                     return value;
                 }
                 temp = temp.left;
@@ -203,10 +327,13 @@ class BinarySortTree {
             }
             if (temp.right == null) {
                 temp.right = node;
+                RotateDecide();
                 return value;
             }
             temp = temp.right;
         }
+
+
     }
 
     /**
@@ -235,10 +362,10 @@ class BinarySortTree {
         }
     }
 
-    public BinarySortTree() {
+    public AvlTree() {
     }
 
-    public BinarySortTree(Node root) {
+    public AvlTree(Node root) {
         this.root = root;
     }
 

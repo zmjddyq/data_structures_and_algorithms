@@ -1,7 +1,7 @@
 
+S	java:S106*"9Replace this use of System.out or System.err by a logger.(š‚†çüÿÿÿÿ
 N	java:S106"9Replace this use of System.out or System.err by a logger.(×Æáî
 N	java:S106-"9Replace this use of System.out or System.err by a logger.(òø³—
-S	java:S106"9Replace this use of System.out or System.err by a logger.(öó¾ïøÿÿÿÿ
-S	java:S106*"9Replace this use of System.out or System.err by a logger.(š‚†çüÿÿÿÿ
 W
 java:S2259)"AA "NullPointerException" could be thrown; "arr" is nullable here.(›Ùú‹
+S	java:S106"9Replace this use of System.out or System.err by a logger.(öó¾ïøÿÿÿÿ
